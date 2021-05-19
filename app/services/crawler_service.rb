@@ -12,22 +12,21 @@ class CrawlerService
     uri = URI('http://quotes.toscrape.com')
     doc = Nokogiri::HTML(Net::HTTP.get(uri))
 
-    doc.css('.quote').each do |quote|
-      quote_tags = quote.css('.tags').css('.tag').map { |tag| tag.text }
+    doc.css('.quote').each do |element|
+      quote_tags = element.css('.tags').css('.tag').map { |tag| tag.text }
 
       if quote_tags.include?(params_search_tag)
         hash = Hash.new
-        hash["quote"] = quote.css('.text').text
-        hash["author"] = quote.css('.author').text
-        hash["author_about"] = "#{uri}#{quote.css('span')[1].css('a')[0]['href']}"
-        hash["tags"] = quote.css('.tags').css('.tag').map { |tag| Tag.find_tag(tag.text); tag.text }
+        hash['quote'] = element.css('.text').text
+        hash['author'] = element.css('.author').text
+        hash['author_about'] = "#{uri}#{element.css('span')[1].css('a')[0]['href']}"
+        hash['tags'] = quote_tags.map { |tag| Tag.find_or_create_by(tag_name: tag) }
 
-        quote_content = Quote.find_or_create_by(
-          quote: hash["quote"],
-          author: hash["author"],
-          author_about: hash["author_about"],
-          tags: hash["tags"]
-        )
+        quote = Quote.find_or_initialize_by(quote: hash['quote'],
+                                            author: hash['author'],
+                                            author_about: hash['author_about'])
+        quote.tags = hash['tags']
+        quote.save
       end
     end
   end
