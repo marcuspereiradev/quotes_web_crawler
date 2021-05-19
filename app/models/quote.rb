@@ -4,7 +4,6 @@ class Quote
   field :quote, type: String
   field :author, type: String
   field :author_about, type: String
-  field :tags, type: Array
 
-  scope :with_tag, ->(search_tag) { where(:tags.in => ["#{search_tag}"]) }
+  has_and_belongs_to_many :tags
 end
