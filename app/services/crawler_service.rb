@@ -17,7 +17,7 @@ class CrawlerService
 
       if quote_tags.include?(params_search_tag)
         hash = Hash.new
-        hash['quote'] = element.css('.text').text
+        hash['quote'] = element.css('.text').text.gsub(/\A\W|\W\z/, '')
         hash['author'] = element.css('.author').text
         hash['author_about'] = "#{uri}#{element.css('span')[1].css('a')[0]['href']}"
         hash['tags'] = quote_tags.map { |tag| Tag.find_or_create_by(tag_name: tag) }
