@@ -209,6 +209,7 @@ DEPENDENCIES
   active_model_serializers (~> 0.10.12)
   bootsnap (>= 1.4.4)
   byebug
+  devise (~> 4.8)
   factory_bot_rails
   jbuilder (~> 2.7)
   listen (~> 3.3)
