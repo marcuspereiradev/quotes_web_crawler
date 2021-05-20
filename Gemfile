@@ -46,3 +46,5 @@ gem "rack-attack", "~> 6.5"
 gem "simple_token_authentication", "~> 1.17"
 
 gem "nokogiri", "~> 1.11"
+
+gem "active_model_serializers", "~> 0.10.12"
