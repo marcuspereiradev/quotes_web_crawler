@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  namespace :api do
-    namespace :v1 do
-      get "quotes/:search_tag", to: "quotes#index"
+  scope module: :api do
+    scope module: :v1 do
+      get 'quotes/:search_tag', to: 'quotes#find_quotes'
     end
   end
 end
