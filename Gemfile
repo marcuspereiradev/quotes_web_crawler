@@ -26,6 +26,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 5.0.0'
   gem 'factory_bot_rails'
   gem 'shoulda-matchers'
+  gem "mongoid-rspec", "~> 4.1"
 end
 
 group :development do
@@ -50,3 +51,4 @@ gem "nokogiri", "~> 1.11"
 gem "active_model_serializers", "~> 0.10.12"
 
 gem "devise", "~> 4.8"
+

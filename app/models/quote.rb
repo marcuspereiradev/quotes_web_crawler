@@ -6,4 +6,8 @@ class Quote
   field :author_about, type: String
 
   has_and_belongs_to_many :tags
+
+  validates :quote, presence: true
+  validates :author, presence: true
+  validates :author_about, presence: true
 end
