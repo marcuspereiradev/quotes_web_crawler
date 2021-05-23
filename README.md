@@ -130,7 +130,7 @@ Now you be able to search a quote by tag. you can find this tags in [Quotes to S
 To run some test with [Rspec](https://github.com/rspec/rspec-rails)
 ```
 // run tests
-rpec
+rspec
 ```
 
 <p align="center">

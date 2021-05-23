@@ -1,10 +1,14 @@
 class Api::V1::QuotesController < Api::V1::ApiController
   def find_quotes
-    if params[:search_tag].present?
-      CrawlerService.execute(params[:search_tag])
+    CrawlerService.execute(params[:search_tag])
 
-      @quotes = Tag.find_by(tag_name: params[:search_tag]).quotes
+    tag = Tag.where(tag_name: params[:search_tag]).first
+
+    unless tag.nil?
+      @quotes = tag.quotes
       render json: @quotes
+    else
+      render json: { error: 'Not found' }, status: 404
     end
   end
 end
