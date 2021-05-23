@@ -37,6 +37,7 @@ class User
 
   ## Token Authenticatable
   acts_as_token_authenticatable
-  field :authentication_token
+  field :authentication_token, type: String
+  validates :authentication_token, presence: true
   index({ authentication_token: 1 }, { unique: true, name: "authentication_token_index" })
 end
