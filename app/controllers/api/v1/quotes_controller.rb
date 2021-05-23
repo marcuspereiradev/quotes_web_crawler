@@ -2,7 +2,7 @@ class Api::V1::QuotesController < Api::V1::ApiController
   def find_quotes
     CrawlerService.execute(params[:search_tag])
 
-    tag = Tag.where(tag_name: params[:search_tag]).first
+    tag = Tag.with_tag_name(params[:search_tag]).first
 
     unless tag.nil?
       @quotes = tag.quotes
