@@ -1,5 +1,5 @@
 class Api::V1::QuotesController < Api::V1::ApiController
-  before_action :set_quote, only: [:update, :destroy]
+  before_action :set_quote, only: %i[update destroy]
 
   def index
     @quotes = Quote.all
@@ -7,23 +7,21 @@ class Api::V1::QuotesController < Api::V1::ApiController
   end
 
   def update
-    unless @quote.nil?
-      if @quote.update(quote_params)
-        render json: @quote
-      else
-        head :unprocessable_entity
-      end
-    else
+    if @quote.nil?
       head :not_found
+    elsif @quote.update(quote_params)
+      render json: @quote
+    else
+      head :unprocessable_entity
     end
   end
 
   def destroy
-    unless @quote.nil?
+    if @quote.nil?
+      head :not_found
+    else
       @quote.destroy!
       head :no_content
-    else
-      head :not_found
     end
   end
 
@@ -32,11 +30,11 @@ class Api::V1::QuotesController < Api::V1::ApiController
 
     tag = Tag.with_tag_name(params[:search_tag]).first
 
-    unless tag.nil?
+    if tag.nil?
+      head :not_found
+    else
       @quotes = tag.quotes
       render json: @quotes
-    else
-      head :not_found
     end
   end
 

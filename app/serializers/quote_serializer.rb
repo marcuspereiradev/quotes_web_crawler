@@ -4,6 +4,6 @@ class QuoteSerializer < ActiveModel::Serializer
   has_many :tags
 
   def tags
-    object.tags.map { |tag| tag.tag_name}
+    object.tags.map(&:tag_name)
   end
 end

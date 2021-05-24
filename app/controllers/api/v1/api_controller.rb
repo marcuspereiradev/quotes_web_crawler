@@ -6,8 +6,6 @@ class Api::V1::ApiController < ApplicationController
   private
 
   def require_authentication!
-
     throw(:warden, scope: :user) unless current_user.presence
-
   end
 end
