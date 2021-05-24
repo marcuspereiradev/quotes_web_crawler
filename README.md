@@ -17,9 +17,12 @@
 
 #  Features
 
-* Search phrases by tag from [Quotes to Scrape](http://quotes.toscrape.com/).
-* Search phrases by tag and create when it doesn't exist
-* Api access by authentication
+* Search quotes by tag from [Quotes to Scrape](http://quotes.toscrape.com/).
+* Search quotes by tag and create when it doesn't exist.
+* Get all quotes created.
+* Update one quote.
+* Delete one quote.
+* Api access by authentication.
 
 </br>
 
@@ -54,7 +57,7 @@ Clone this repository.
 <br />
 
 ```
-  // Install the dependencies
+  # Install the dependencies
   bundle install
 ```
 
@@ -73,7 +76,7 @@ If you have [Docker](https://docs.docker.com/get-docker/) installed in your mach
 ```
 sudo docker run --name some-mongo -d mongo:tag
 
-// where some-mongo is the name you want to assign to your container and tag is the tag specifying the MongoDB version you want.
+# where some-mongo is the name you want to assign to your container and tag is the tag specifying the MongoDB version you want.
 ```
 ```
 sudo docker start name-of-my-image
@@ -82,7 +85,7 @@ sudo docker start name-of-my-image
 Now follow the scripts to run the application:
 
 ```
-  // Create the database
+  # Create the database
   rails db:create
 ```
 
@@ -93,7 +96,7 @@ Now follow the scripts to run the application:
 <br />
 
 ```
-  // Start the application
+  # Start the application
   rails s
 ```
 
@@ -121,15 +124,53 @@ You need to pass the email and token to the headers as [simple_token_authenticat
 
 Now you be able to search a quote by tag. you can find this tags in [Quotes to Scrape](http://quotes.toscrape.com/).
 
+```
+# endpoint to create or find quotes
+GET quotes/:search_tag
+```
+
 <p align="center">
   <img src = ".github/searching-quote.gif" width=800>
 </p>
 
 </br>
 
+```
+# endpoint to get all quotes
+GET quotes/
+```
+
+<p align="center">
+  <img src = ".github/all-quotes.gif" width=800>
+</p>
+
+</br>
+
+```
+# endpoint to update quote
+PUT quotes/:id
+```
+
+<p align="center">
+  <img src = ".github/update-quote.gif" width=800>
+</p>
+
+</br>
+
+```
+# endpoint to delete quote
+DELETE quotes/:id
+```
+
+<p align="center">
+  <img src = ".github/delete-quote.gif" width=800>
+</p>
+
+</br>
+
 To run some test with [Rspec](https://github.com/rspec/rspec-rails)
 ```
-// run tests
+# run tests
 rspec
 ```
 
